@@ -1,5 +1,6 @@
 package com.ader.app.controller;
 import org.springframework.web.bind.annotation.*;
+import org.apache.http.protocol.HTTP;
 import org.springframework.http.ResponseEntity;
 import com.ader.app.dto.CountryData;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -15,6 +16,7 @@ public class CountryController {
 
   @GetMapping("/countries/{name}")
   public ResponseEntity<CountryData> getCountry(@PathVariable String name) {
+                      // Initiates a GET HTTP request To fetch data from restcountries.com
     CountryData data = webClient.get()
       .uri("/name/{name}?fields=name,capital,population", name)
       .retrieve()

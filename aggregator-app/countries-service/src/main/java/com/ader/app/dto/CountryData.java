@@ -1,6 +1,7 @@
 package com.ader.app.dto;
 import lombok.Data;
 
+//This class mirrors the JSON structure returned by restcountries.com
 @Data
 public class CountryData {
   private Name name;
