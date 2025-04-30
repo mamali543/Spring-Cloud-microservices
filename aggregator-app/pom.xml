@@ -14,6 +14,7 @@
     <!-- Latest stable as of May 2024 -->
     <spring.cloud.version>2023.0.1</spring.cloud.version>
     <!-- Compatible with Boot 3.2.x -->
+    <lombok.version>1.18.32</lombok.version> <!-- Updated from 1.18.28 -->
   </properties>
   <modules>
     <module>countries-service</module>
@@ -45,6 +46,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
+      <!-- Scope provided is appropriate here -->
       <scope>provided</scope>
     </dependency>
     <!-- Shared test dependencies -->
@@ -55,21 +57,41 @@
     </dependency>
   </dependencies>
   <build>
+    <pluginManagement> <!-- Use pluginManagement for configuration shared by modules -->
+      <plugins>
+        <!-- Spring Boot Maven Plugin (for packaging) -->
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring.boot.version}</version>
+        </plugin>
+        <!-- Ensure Java 21 compatibility and configure Lombok -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.13.0</version>
+          <configuration>
+            <release>21</release>
+            <!-- Add this annotationProcessorPaths section -->
+            <annotationProcessorPaths>
+              <path>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <!-- Ensure this version matches the one in dependencyManagement or dependencies -->
+                <version>${lombok.version}</version> <!-- Define lombok.version in properties if not managed by Spring Boot BOM -->
+              </path>
+              <!-- Add other annotation processors if needed -->
+            </annotationProcessorPaths>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <!-- Apply the compiler plugin to all modules -->
     <plugins>
-      <!-- Spring Boot Maven Plugin (for packaging) -->
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${spring.boot.version}</version>
-      </plugin>
-      <!-- Ensure Java 21 compatibility -->
-      <plugin>
+       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.13.0</version>
-        <configuration>
-          <release>21</release>
-        </configuration>
       </plugin>
     </plugins>
   </build>

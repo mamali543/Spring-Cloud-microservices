@@ -9,6 +9,11 @@
 
   <artifactId>countries-service</artifactId>
 
+  <properties>
+    <netty.version>4.1.68.Final</netty.version>
+    <os.detected.classifier>osx-aarch_64</os.detected.classifier>
+  </properties>
+
   <dependencies>
   <!-- Enables REST API endpoints (Spring MVC) -->
     <dependency>
@@ -19,6 +24,12 @@
     <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-resolver-dns-native-macos</artifactId>
+        <version>${netty.version}</version> <!-- Use the same Netty version as your other Netty dependencies -->
+        <classifier>${os.detected.classifier}</classifier> <!-- Or specify osx-x86_64 or osx-aarch_64 -->
     </dependency>
     <!-- WebClient (for REST calls to restcountries.com) Allows calling external APIs (like COVID-API.com) using reactive WebClient-->
     <dependency>

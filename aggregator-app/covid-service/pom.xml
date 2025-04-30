@@ -9,6 +9,11 @@
 
   <artifactId>covid-service</artifactId>
 
+  <properties>
+    <netty.version>4.1.109.Final</netty.version>
+    <os.detected.classifier>osx-aarch_64</os.detected.classifier>
+  </properties>
+
   <dependencies>
     <!-- Spring Boot Web -->
     <dependency>
@@ -24,6 +29,13 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+    <!-- Add this dependency for Netty DNS on macOS -->
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-resolver-dns-native-macos</artifactId>
+      <version>${netty.version}</version>
+      <classifier>${os.detected.classifier}</classifier>
     </dependency>
   </dependencies>
 </project>
