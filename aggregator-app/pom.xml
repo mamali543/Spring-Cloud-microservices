@@ -20,6 +20,7 @@
     <module>countries-service</module>
     <module>covid-service</module>
     <module>eureka-service</module>
+    <module>aggregator-service</module>
   </modules>
   <dependencyManagement>
     <dependencies>

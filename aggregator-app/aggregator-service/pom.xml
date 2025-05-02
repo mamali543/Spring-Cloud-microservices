@@ -1,0 +1,12 @@
+<parent>
+  <groupId>com.ader.app</groupId>
+  <artifactId>aggregator-app</artifactId>
+  <version>1.0-SNAPSHOT</version>
+</parent>
+<artifactId>aggregator-service</artifactId>
+<dependencies>
+  <dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-openfeign</artifactId>
+  </dependency>
+</dependencies>

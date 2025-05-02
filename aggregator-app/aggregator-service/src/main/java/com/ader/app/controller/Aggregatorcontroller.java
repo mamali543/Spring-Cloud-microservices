@@ -14,7 +14,7 @@ public class AggregatorController {
   public AggregatorController(CountryClient countryClient, CovidClient covidClient) {
     this.countryClient = countryClient;
     this.covidClient = covidClient;
-  }
+    }
 
   @GetMapping("/countries/{name}")
   public ResponseEntity<CombinedData> getCombinedData(@PathVariable String name) {
