@@ -7,3 +7,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+logging:
+  level:
+    # Set logging level to OFF to completely suppress the shutdown error
+    com.netflix.discovery: OFF
+    org.springframework.cloud.netflix.eureka.http: ERROR # Keep this as ERROR or set to OFF too if desired
