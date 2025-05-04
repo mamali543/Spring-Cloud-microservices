@@ -21,6 +21,8 @@
     <module>covid-service</module>
     <module>eureka-service</module>
     <module>aggregator-service</module>
+    <module>common-dtos</module>
+    <module>api-gateway</module>
   </modules>
   <dependencyManagement>
     <dependencies>
@@ -57,6 +59,8 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+
   <build>
     <pluginManagement> <!-- Use pluginManagement for configuration shared by modules -->
       <plugins>

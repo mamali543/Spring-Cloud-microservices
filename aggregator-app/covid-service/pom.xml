@@ -30,6 +30,11 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-webflux</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.ader.app</groupId>
+      <artifactId>common-dtos</artifactId>
+      <version>${project.version}</version> <!-- Inherits version from parent -->
+    </dependency>
     <!-- Add this dependency for Netty DNS on macOS -->
     <dependency>
       <groupId>io.netty</groupId>

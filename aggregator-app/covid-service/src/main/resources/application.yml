@@ -3,6 +3,7 @@ server:
 spring:
   application:
     name: covid-service
+
 eureka:
   client:
     service-url:
@@ -10,6 +11,5 @@ eureka:
 
 logging:
   level:
-    # Set logging level to OFF to completely suppress the shutdown error
     com.netflix.discovery: OFF
-    org.springframework.cloud.netflix.eureka.http: ERROR # Keep this as ERROR or set to OFF too if desired
+    org.springframework.cloud.netflix.eureka.http: ERROR

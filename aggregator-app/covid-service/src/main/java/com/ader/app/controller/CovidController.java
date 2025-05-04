@@ -3,7 +3,7 @@ package com.ader.app.controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import com.ader.app.dto.CovidStats;
-import com.ader.app.dto.CovidApiResponse; // Keep the wrapper import
+import com.ader.app.dto.CovidApiResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import java.util.List; // Import List
 import java.util.Collections; // Import Collections for empty list
@@ -15,8 +15,8 @@ public class CovidController {
     public static final String ANSI_BLUE = "\u001B[34m";
     private final WebClient webClient;
 
-    public CovidController() {
-        this.webClient = WebClient.create("https://covid-api.com/api");
+    public CovidController(WebClient.Builder webClientBuilder) {
+        this.webClient = webClientBuilder.baseUrl("https://covid-api.com/api").build();
     }
 
     @GetMapping("/countries/{name}")
@@ -24,6 +24,13 @@ public class CovidController {
         System.out.println(ANSI_BLUE + "Fetching covid data for: " + name + ANSI_RESET);
         System.out.println(ANSI_BLUE + " ------------------------------------- " + ANSI_RESET);
         System.out.println(ANSI_BLUE + "Country name: " + name + ANSI_RESET);
+        // First log the raw response
+        String rawResponse = webClient.get()
+            .uri("/reports?iso={name}", name)
+            .retrieve()
+            .bodyToMono(String.class)
+            .block();
+        System.out.println("RAW RESPONSE: " + rawResponse);
 
         List<CovidStats> statsList = webClient.get()
                 .uri("/reports?iso={name}", name) // Using ISO code

@@ -1,0 +1,18 @@
+server:
+  port: 80 # (1) The port on which the API Gateway will listen for incoming requests. Port 80 is the default HTTP port, so it doesn't need to be specified in the URL when accessing the gateway.
+
+spring:
+  application:
+    name: api-gateway # (2) The name this service registers with Eureka.
+  cloud:
+    gateway:
+      routes: # (3) Defines the routing rules for incoming requests.
+        - id: aggregator-route # (4) A unique name for this specific routing rule.
+          uri: lb://aggregator-service  # (5) Where to forward matching requests. "lb://" means "use the load balancer (via Eureka) to find an instance of the service named 'aggregator-service'".
+          predicates: # (6) Conditions that must be met for this route to be used.
+            - Path=/information-management/**  # (7) If the incoming request path starts with "/information-management/", this route matches. The "**" matches any characters/sub-paths after it.
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka  # (8) Tells the Gateway where the Eureka server is, so it can register itself and discover other services (like 'aggregator-service').

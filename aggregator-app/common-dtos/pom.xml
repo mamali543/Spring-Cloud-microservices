@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Define the parent project -->
+    <parent>
+        <groupId>com.ader.app</groupId> <!-- Should match your parent pom -->
+        <artifactId>aggregator-app</artifactId> <!-- Should match your parent pom -->
+        <version>1.0-SNAPSHOT</version> <!-- Should match your parent pom -->
+    </parent>
+
+    <!-- Define this module's artifactId -->
+    <artifactId>common-dtos</artifactId>
+
+    <name>common-dtos</name> <!-- Optional: Human-readable name -->
+    <description>Shared DTOs for the aggregator application</description> <!-- Optional -->
+
+    <dependencies>
+        <!-- Add Lombok if your DTOs use annotations like @Data -->
+        <!-- Ensure the version is managed in the parent pom or specify it here -->
+         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope> <!-- Usually 'provided' or 'optional' for Lombok -->
+        </dependency>
+                <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+
+        </dependency>
+    </dependencies>
+
+</project>

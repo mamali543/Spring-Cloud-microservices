@@ -10,5 +10,5 @@ import com.ader.app.dto.CountryData;
 @FeignClient(name = "countries-service")
 public interface CountryClient {
   @GetMapping("/countries-management/countries/{name}")
-  CountryData getCountry(@PathVariable String name);
+  CountryData getCountry(@PathVariable("name") String name);
 }

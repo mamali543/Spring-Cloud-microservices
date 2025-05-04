@@ -16,8 +16,9 @@ public class AggregatorController {
     this.covidClient = covidClient;
     }
 
-  @GetMapping("/countries/{name}")
-  public ResponseEntity<CombinedData> getCombinedData(@PathVariable String name) {
+  @GetMapping("/countries-management/countries/{name}")
+  public ResponseEntity<CombinedData> getCombinedData(@PathVariable("name") String name) {
+    System.out.println("Received request for country: " + name);
     return ResponseEntity.ok(
       new CombinedData(
         countryClient.getCountry(name),

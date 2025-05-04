@@ -38,6 +38,13 @@ public class CountryController {
     if (data == null) {
       return ResponseEntity.notFound().build();
     }
+    System.out.println(ANSI_BLUE + "Country data fetched successfully for: " + name + ANSI_RESET);
+    System.out.println(ANSI_BLUE + "-------------------------------------" + ANSI_RESET);
+    System.out.println(ANSI_BLUE + data + ANSI_RESET); // Prints the toString() representation of CountryData
+    System.out.println(ANSI_BLUE + "-------------------------------------" + ANSI_RESET);
+    // Return the country data wrapped in a ResponseEntity
+    // The ResponseEntity contains the HTTP status code and the body (country data)
+    // The status code is 200 OK by default
     return ResponseEntity.ok(data);
   }
 }

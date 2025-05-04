@@ -5,6 +5,8 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import java.util.Collections;
+import java.util.Objects;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true) // Ignore fields not explicitly mapped
@@ -39,13 +41,31 @@ public class CovidStats {
     private RegionStats region;
 
     @Data
-    public class RegionStats {
+    public static class RegionStats {
         private String iso;
         private String name;
         private String province;
         private String lat;
-        @JsonProperty("long") // Map JSON "long" to Java field "longitude"
+        @JsonProperty("long")
         private String longitude;
-        private List<String> cities;
+        private List<CityStats> cities; // Now properly typed
+    }
+
+    @Data
+    public static class CityStats {
+        private String name;
+        private String date;
+        private String fips;
+        private String lat;
+        @JsonProperty("long")
+        private String longitude;
+        private long confirmed;
+        private long deaths;
+        @JsonProperty("confirmed_diff")
+        private long confirmedDiff;
+        @JsonProperty("deaths_diff")
+        private long deathsDiff;
+        @JsonProperty("last_update")
+        private String lastUpdate;
     }
 }
