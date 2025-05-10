@@ -60,7 +60,6 @@
     </dependency>
   </dependencies>
 
-
   <build>
     <pluginManagement> <!-- Use pluginManagement for configuration shared by modules -->
       <plugins>
