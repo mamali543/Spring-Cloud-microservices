@@ -45,4 +45,24 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>${spring.boot.version}</version>
+            <executions>
+                <execution>
+                <goals>
+                    <goal>repackage</goal> <!-- This creates the executable JAR -->
+                </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <mainClass>com.ader.app.AggregatorApplication</mainClass>
+            </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

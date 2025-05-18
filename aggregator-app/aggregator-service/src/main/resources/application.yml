@@ -6,4 +6,8 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://eureka-service:8761/eureka  # Docker service name
+  # instance:
+  #   prefer-ip-address: true
+  #   lease-renewal-interval-in-seconds: 5
+  #   lease-expiration-duration-in-seconds: 10

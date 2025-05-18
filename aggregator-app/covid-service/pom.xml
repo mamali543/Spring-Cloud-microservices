@@ -31,6 +31,10 @@
       <artifactId>spring-boot-starter-webflux</artifactId>
     </dependency>
     <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.ader.app</groupId>
       <artifactId>common-dtos</artifactId>
       <version>${project.version}</version> <!-- Inherits version from parent -->
@@ -43,4 +47,23 @@
       <classifier>${os.detected.classifier}</classifier>
     </dependency>
   </dependencies>
+  <build>
+  <plugins>
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+      <version>${spring.boot.version}</version>
+      <executions>
+        <execution>
+          <goals>
+            <goal>repackage</goal> <!-- This creates the executable JAR -->
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+        <mainClass>com.ader.app.CovidApplication</mainClass>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
 </project>

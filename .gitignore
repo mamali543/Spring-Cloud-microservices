@@ -10,6 +10,9 @@ notes.txt
 .idea/
 *.iml
 .vscode/
+.github/
 .project
 .classpath
 .qodo/
+.git
+*.md
