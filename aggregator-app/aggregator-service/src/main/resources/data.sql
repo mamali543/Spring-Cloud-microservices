@@ -1,0 +1,16 @@
+-- Test data for aggregator-service.
+--
+-- NOTE: Per the subject, "None of the applications shall have their own database
+-- to store information." The aggregator only merges responses from countries-service
+-- and covid-service (resolved via Eureka), so there is no datasource and Spring Boot
+-- does NOT execute this script at runtime. The file is provided to satisfy the
+-- Chapter III rule ("Each project shall contain a data.sql file with a set of test data").
+--
+-- Sample country identifiers used to manually test the combined endpoint
+-- (URI: /information-management/countries/{name}):
+--   MA  -> Morocco
+--   FR  -> France
+--   US  -> United States
+--   JP  -> Japan
+-- The combined response contains the country block (name, capital, population) plus the
+-- list of COVID-19 reports for that country.

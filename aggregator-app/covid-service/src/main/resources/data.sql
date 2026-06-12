@@ -1,0 +1,16 @@
+-- Test data for covid-service.
+--
+-- NOTE: Per the subject, "None of the applications shall have their own database
+-- to store information." This service is a stateless proxy to https://covid-api.com/api,
+-- so there is no datasource and Spring Boot does NOT execute this script at runtime.
+-- The file is provided to satisfy the Chapter III rule ("Each project shall contain a
+-- data.sql file with a set of test data") and documents the sample inputs/outputs used
+-- when manually testing the service.
+--
+-- Representative shape of the COVID-19 stats returned for a country
+-- (URI: /covid-management/countries/{iso}):
+-- INSERT INTO covid_report (iso, report_date, confirmed, deaths, recovered, active, fatality_rate) VALUES
+--   ('MAR', '2022-04-16', 1164760, 16070, 1112233,  36457, 0.0138),
+--   ('FRA', '2022-04-16', 27520993, 144308, 0,       0,     0.0052),
+--   ('USA', '2022-04-16', 80387806, 989432, 0,       0,     0.0123),
+--   ('JPN', '2022-04-16', 7375105,  29021, 0,        0,     0.0039);

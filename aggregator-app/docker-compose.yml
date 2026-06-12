@@ -1,5 +1,5 @@
 services:
-  # Eureka Server - Service Discovery
+  # Eureka Server - Service Discovery (fixed standard port 8761)
   eureka-service:
     build:
       context: .
@@ -14,14 +14,12 @@ services:
       timeout: 3s
       retries: 3
     restart: always
-    
-  # Countries Service
+
+  # Countries Service - random internal port, no published port (reached via Eureka by name)
   countries-service:
     build:
       context: .
       dockerfile: countries-service/Dockerfile
-    ports:
-      - "8081:8081"
     networks:
       - app-network
     environment:
@@ -29,20 +27,13 @@ services:
     depends_on:
       eureka-service:
         condition: service_healthy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
-      interval: 30s
-      timeout: 3s
-      retries: 3
     restart: always
 
-  # Covid Service
+  # Covid Service - random internal port, no published port (reached via Eureka by name)
   covid-service:
     build:
       context: .
       dockerfile: covid-service/Dockerfile
-    ports:
-      - "8082:8082"
     networks:
       - app-network
     environment:
@@ -50,20 +41,13 @@ services:
     depends_on:
       eureka-service:
         condition: service_healthy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
-      interval: 30s
-      timeout: 3s
-      retries: 3
     restart: always
 
-  # Aggregator Service
+  # Aggregator Service - random internal port, no published port (reached via Eureka by name)
   aggregator-service:
     build:
       context: .
       dockerfile: aggregator-service/Dockerfile
-    ports:
-      - "8083:8083"
     networks:
       - app-network
     environment:
@@ -72,17 +56,12 @@ services:
       eureka-service:
         condition: service_healthy
       countries-service:
-        condition: service_healthy
+        condition: service_started
       covid-service:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
-      interval: 30s
-      timeout: 3s
-      retries: 3
+        condition: service_started
     restart: always
 
-  # API Gateway
+  # API Gateway - single public entry point on port 80
   api-gateway:
     build:
       context: .

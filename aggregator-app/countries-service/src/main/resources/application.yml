@@ -1,6 +1,6 @@
 # configuration file for countries app
 server:
-  port: 8081
+  port: 0  # Random port on each startup (subject requirement); resolved via Eureka by name
 spring:
   application:
     name: countries-service
@@ -8,7 +8,31 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka-service:8761/eureka  # Docker service name
-  # instance:
-  #   prefer-ip-address: true
-  #   lease-renewal-interval-in-seconds: 5
-  #   lease-expiration-duration-in-seconds: 10
+  instance:
+    # Unique id per instance so random-port instances never collide in the registry
+    instance-id: ${spring.application.name}:${random.uuid}
+
+
+# container starts
+#   ├─ OS assigns random port (e.g. 41237)         ← server.port: 0
+#   ├─ Spring generates UUID for instance-id         ← ${random.uuid}
+#   └─ Eureka client registers:
+#         name = COUNTRIES-SERVICE
+#         id   = countries-service:a3f1c8e2-...
+#         addr = <container-ip>:41237
+#             ↓
+#    aggregator Feign asks Eureka by name → gets <ip>:41237 → calls it
+
+# So: the OS makes the port random, Spring makes the id unique, and Eureka is the lookup table that lets everyone find each other without knowing either value ahead of time.
+
+# confirmed	Total confirmed cases to date — the headline number
+# 2	deaths	Total deaths to date
+# 3	recovered	Total recovered (often 0 in recent data — the API stopped tracking it)
+# 4	active	Currently active cases (confirmed − deaths − recovered)
+# 5	fatality_rate	Deaths ÷ confirmed (e.g. 0.0128 = 1.28%) — severity indicator
+# 6	confirmed_diff	New cases vs the previous report — the daily delta
+# 7	deaths_diff	New deaths vs the previous report
+# 8	date / last_update	The reporting date and when it was last refreshed — tells you how stale the data is
+# 9	region.iso / region.name	Which country this row is for (MAR / Morocco) — confirms you queried the right place
+# The _diff fields are the "what changed since yesterday" numbers; the non-diff ones are cumulative totals. fatality_rate is the most analytically useful single value.
+

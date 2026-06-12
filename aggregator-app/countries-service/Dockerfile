@@ -12,7 +12,5 @@ RUN mvn clean package -DskipTests -pl countries-service -am
 FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 COPY --from=builder /app/countries-service/target/countries-service-*.jar app.jar
-EXPOSE 8081
-HEALTHCHECK --interval=30s --timeout=3s \
-  CMD curl -f http://localhost:8081/actuator/health || exit 1
+# No EXPOSE/HEALTHCHECK: binds a random port at startup, reached only via Eureka by name.
 ENTRYPOINT ["java", "-jar", "app.jar"]

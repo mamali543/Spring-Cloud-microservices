@@ -1,0 +1,12 @@
+-- Test data for api-gateway.
+--
+-- NOTE: Per the subject, "None of the applications shall have their own database
+-- to store information." The gateway only routes requests to aggregator-service, so it
+-- has no datasource and Spring Boot does NOT execute this script at runtime. The file is
+-- provided to satisfy the Chapter III rule ("Each project shall contain a data.sql file
+-- with a set of test data").
+--
+-- Sample public requests handled by the gateway (deployed on port 80):
+--   GET http://localhost/information-management/countries/MA
+--   GET http://localhost/information-management/countries/FR
+--   GET http://localhost/information-management/countries/US

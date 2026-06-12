@@ -1,0 +1,13 @@
+-- Test data for eureka-service (Service Discovery).
+--
+-- NOTE: Per the subject, "None of the applications shall have their own database
+-- to store information." Eureka keeps its registry in memory only, so there is no
+-- datasource and Spring Boot does NOT execute this script at runtime. The file is provided
+-- to satisfy the Chapter III rule ("Each project shall contain a data.sql file with a set
+-- of test data").
+--
+-- Service names expected to be registered at runtime (host + port resolved dynamically):
+--   COUNTRIES-SERVICE
+--   COVID-SERVICE
+--   AGGREGATOR-SERVICE
+--   API-GATEWAY

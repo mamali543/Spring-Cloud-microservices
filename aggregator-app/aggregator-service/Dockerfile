@@ -23,9 +23,6 @@ WORKDIR /app
 # Use wildcard to handle version numbers automatically
 COPY --from=builder /app/aggregator-service/target/aggregator-service-*.jar app.jar
 
-EXPOSE 8083
-
-HEALTHCHECK --interval=30s --timeout=3s \
-    CMD curl -f http://localhost:8083/actuator/health || exit 1
+# No EXPOSE/HEALTHCHECK: binds a random port at startup, reached only via Eureka by name.
 
 ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -1,0 +1,15 @@
+-- Test data for countries-service.
+--
+-- NOTE: Per the subject, "None of the applications shall have their own database
+-- to store information." This service is a stateless proxy to https://restcountries.com,
+-- so there is no datasource and Spring Boot does NOT execute this script at runtime.
+-- The file is provided to satisfy the Chapter III rule ("Each project shall contain a
+-- data.sql file with a set of test data") and documents the sample inputs/outputs used
+-- when manually testing the service.
+--
+-- Representative shape of the data returned for a country (URI: /countries-management/countries/{name}):
+-- INSERT INTO country (iso_code, common_name, official_name, capital, population) VALUES
+--   ('MA', 'Morocco',       'Kingdom of Morocco',           'Rabat',    37457971),
+--   ('FR', 'France',        'French Republic',              'Paris',    67391582),
+--   ('US', 'United States', 'United States of America',     'Washington, D.C.', 329484123),
+--   ('JP', 'Japan',         'Japan',                        'Tokyo',    125836021);
