@@ -14,5 +14,6 @@ notes.txt
 .project
 .classpath
 .qodo/
-.git
-*.md
+
+# Subject PDF (not part of the turn-in)
+en.subject.pdf
